@@ -1,0 +1,7 @@
+<h1>Dialogs#create</h1>
+<p>Find me in app/views/dialogs/create.html.erb</p>
+<%= @dialog.id %>
+
+<% @dialog.users.each do |user| %>
+<p><%= user.id %></p>
+<% end %>

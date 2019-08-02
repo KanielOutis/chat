@@ -1,0 +1,11 @@
+<h1>Dialogs#show</h1>
+<p>Find me in app/views/dialogs/show.html.erb</p>
+<%= @dialog %>
+"Диалог Айди"<%=  @dialog.id %>
+<% @dialog.users.each do |user| %>
+<p><%= user.id %></p>
+<% @dialog.messeges.each do |m|  %>
+  <p><%= m.body %><%= m.created_at %></p>
+
+  <% end %>
+<% end %>
