@@ -1,11 +1,26 @@
 <h1>Dialogs#show</h1>
 <p>Find me in app/views/dialogs/show.html.erb</p>
 <%= @dialog %>
-"Диалог Айди"<%=  @dialog.id %>
-<% @dialog.users.each do |user| %>
-<p><%= user.id %></p>
-<% @dialog.messeges.each do |m|  %>
-  <p><%= m.body %><%= m.created_at %></p>
+"Диалог Айди"<% @dialog = Dialog.find_by(id: @dialog.id )%>
+<div id="dialog">
 
+
+<% @dialog.messeges.each do |m|  %>
+
+
+
+  <% if m.user.id == session[:user_id] %>
+  <div class="my_mess">
+    <% else %>
+    <div class="not_my">
   <% end %>
-<% end %>
+  <legend>Отправитель: <%= m.user.name %></legend>   <br><br> <div class="">
+    <legend>Сообщение: <%= m.body %></legend>
+  </div>  <br> Отправлено<%= m.created_at %>
+  <br><br><br>
+  </div>
+  <% end %>
+
+<%= render(partial: 'messeges/new') %>
+
+</div>

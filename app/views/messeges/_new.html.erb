@@ -1,0 +1,9 @@
+<%= form_with modele: @messege, locale: true, remote: true  do |form| %>
+  <%= form.label :Сообщение %>
+  <%= form.text_field :body %>
+  <%= form.hidden_field :user_id, :value=> session[:user_id] %>
+  <%= form.hidden_field :dialog_id, :value=> @dialog.id %>
+  <%= params[user_id: session[:user_id]] %>
+  <%= form.submit "Отправить сообщение" %>
+
+<% end %>

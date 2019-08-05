@@ -1,0 +1,7 @@
+
+if (!dialog) {
+  let dialog = document.getElementById('dialog')
+} else {
+  dialog = document.getElementById('dialog')
+}
+dialog.innerHTML = "<%= escape_javascript render(template: 'dialogs/show') %>"

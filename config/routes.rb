@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   post 'dialogs/create' => 'dialogs#create'
   get 'dialogs/show' => 'dialogs#show'
+  post "dialogs/:id" => 'messeges#create'
   get 'messeges/new'
-  get 'messeges/create'
+  post 'messeges/create' => 'messeges#create'
   get 'messeges/destroy'
   root 'users#index'
   resources :dialogs

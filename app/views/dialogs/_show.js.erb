@@ -1,0 +1,6 @@
+console.log("its from show dialogs")
+var dialog = document.getElementById('dialog')
+if (dialog) {
+  dialog.innerHTML = "<%= escape_javascript render(template: 'dialogs/show') %>";
+}
+dialog.scrollIntoView(false);

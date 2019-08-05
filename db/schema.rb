@@ -10,11 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_08_02_083132) do
+ActiveRecord::Schema.define(version: 2019_08_03_072845) do
 
   create_table "dialogs", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "members"
   end
 
   create_table "messeges", force: :cascade do |t|

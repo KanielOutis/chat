@@ -1,38 +1,36 @@
 class DialogsController < ApplicationController
   def create
-
-
-      User.find_by(id: session[:user_id]).dialogs.each do |d|
-        User.find_by(id: params[:user_id]).dialogs.each do |md|
-         if d.id == md.id
-          @dialog = Dialog.find(md.id)
-         end
+    $dialog
+      Dialog.all.each do |d|
+        if d.members.split('/').include?(params[:user_id]) and d.members.split('/').include?(String(session[:user_id]))
+          $dialog = d
+          @dialog = d
+          puts @dialog.members
+          redirect_to @dialog
+          return @dialog
         end
       end
-    
-      #@dialog = Dialog.find_by(users: User.find_by(id: params[:user_id]),  User.find_by(id: session[:user_id]))
-      puts [User.find_by(id: params[:user_id]),  User.find_by(id: session[:user_id])]
-      if @dialog
-        $dialog = @dialog
-        redirect_to dialogs_show_path(@dialog)
-        puts [User.find_by(id: params[:user_id]),  User.find_by(id: session[:user_id])]
-
-      else
-        @dialog = Dialog.new
-        @dialog.users <<  User.find_by(id: params[:user_id])
-        @dialog.users <<  User.find_by(id: session[:user_id])
-        @dialog.save!
-
+          if @dialog == nil
+            redirect_to dialogs_show_path(1)
+            @dialog = Dialog.new
+            @dialog.users <<  User.find_by(id: params[:user_id])
+            @dialog.users <<  User.find_by(id: session[:user_id])
+            @dialog.members = ""
+            @dialog.members << "#{params[:user_id]}"
+            @dialog.members << "/#{session[:user_id]}"
+            @dialog.save!
+            redirect_to @dialog
+          else
+            redirect_to @dialog
+        end
       end
-  end
+      def show
+        @dialog = $dialog
+        @dialgo = Dialog.find_by(id: @dialog.id)
+        respond_to do |format|
+          format.js { render(partial: 'dialogs/show')}
+          format.html
 
-  def show
-    @dialog = $dialog
-    if @dialog
-    else
-      @dialog = Dialog.find_by(id: params[:id])
+        end
+      end
     end
-  end
-
-
-end

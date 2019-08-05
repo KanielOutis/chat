@@ -16,7 +16,7 @@
       <tr>
         <td><%= user.name %></td>
         <td><%= user.email %></td>
-        <td><%= link_to 'Написать сообщение', dialogs_create_path(user_id: user.id), method: :post %></td>
+        <td><%= link_to( 'Написать сообщение', dialogs_create_path(user_id: user.id), method: :post) unless user.id == session[:user_id] %></td>
         <td><%= link_to 'Show', user %></td>
         <td><%= link_to 'Edit', edit_user_path(user) %></td>
         <td><%= link_to 'Destroy', user, method: :delete, data: { confirm: 'Are you sure?' } %></td>

@@ -1,0 +1,13 @@
+<%= @dialog %>
+"Диалог Айди"<% @dialog = Dialog.find_by(id: @dialog.id )%>
+<div id="dialog">
+
+
+<% @dialog.messeges.each do |m|  %>
+  <p>Отправитель: <%= m.user.name %>  <br> <%= m.body %> <br> Отправлено<%= m.created_at %></p>
+
+  <% end %>
+
+<%= render(partial: 'messeges/new') %>
+
+</div>
